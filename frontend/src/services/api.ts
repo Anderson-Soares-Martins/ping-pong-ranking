@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Player, Match, MatchWithPlayers } from '../types';
+import { Player, MatchWithPlayers } from '../types';
 
 const API_URL = import.meta.env.VITE_API_URL || '/api';
 

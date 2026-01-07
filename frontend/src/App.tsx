@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import PlayerList from './components/PlayerList';
 import MatchForm from './components/MatchForm';
 import MatchHistory from './components/MatchHistory';

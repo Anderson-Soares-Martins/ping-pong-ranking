@@ -44,13 +44,10 @@ const MatchForm: React.FC<MatchFormProps> = ({ onMatchCreated }) => {
     const kFactor = 32;
 
     const expected1 = 1 / (1 + Math.pow(10, (rating2 - rating1) / 400));
-    const expected2 = 1 / (1 + Math.pow(10, (rating1 - rating2) / 400));
 
     const score1 = winnerId === player1Id ? 1 : 0;
-    const score2 = winnerId === player2Id ? 1 : 0;
 
     const change1 = Math.round(kFactor * (score1 - expected1));
-    const change2 = Math.round(kFactor * (score2 - expected2));
 
     setEstimatedChange(Math.abs(change1));
   }, [player1Id, player2Id, winnerId, players]);
