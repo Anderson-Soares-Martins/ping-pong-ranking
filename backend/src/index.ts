@@ -33,12 +33,18 @@ app.use((err: any, req: express.Request, res: express.Response, next: express.Ne
   res.status(500).json({ error: 'Internal server error' });
 });
 
-app.listen(PORT, () => {
-  console.log(`🚀 Backend running on http://localhost:${PORT}`);
-  console.log(`📊 API endpoints:`);
-  console.log(`   - GET  /api/health`);
-  console.log(`   - GET  /api/players`);
-  console.log(`   - POST /api/players`);
-  console.log(`   - GET  /api/matches`);
-  console.log(`   - POST /api/matches`);
-});
+// For Vercel serverless functions
+export default app;
+
+// For local development
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`🚀 Backend running on http://localhost:${PORT}`);
+    console.log(`📊 API endpoints:`);
+    console.log(`   - GET  /api/health`);
+    console.log(`   - GET  /api/players`);
+    console.log(`   - POST /api/players`);
+    console.log(`   - GET  /api/matches`);
+    console.log(`   - POST /api/matches`);
+  });
+}
