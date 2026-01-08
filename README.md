@@ -4,10 +4,10 @@ Sistema web completo para gerenciar ranking de ping pong usando o algoritmo **El
 
 ## 🚀 Stack Tecnológico
 
-- **Frontend**: Vite + React + TypeScript + TailwindCSS
-- **Backend**: Node.js + Express + TypeScript
+- **Framework**: Next.js 14 (App Router) + React + TypeScript
+- **Styling**: TailwindCSS
 - **Database**: Supabase (PostgreSQL)
-- **Deploy**: Vercel (monorepo)
+- **Deploy**: Vercel (suporte nativo ao Next.js)
 
 ## ✨ Funcionalidades
 
@@ -47,43 +47,26 @@ Sistema web completo para gerenciar ranking de ping pong usando o algoritmo **El
 # Clone o repositório
 cd ping-pong-ranking
 
-# Instale todas as dependências (frontend e backend)
-npm run install:all
+# Instale as dependências
+npm install
 ```
 
 ### 3. Configuração das Variáveis de Ambiente
 
-**Backend** - Crie o arquivo `backend/.env`:
+Crie o arquivo `.env.local` na raiz:
 
 ```env
 SUPABASE_URL=sua_url_aqui
 SUPABASE_PUBLISHABLE_KEY=sua_publishable_key_aqui
-PORT=3001
-```
-
-**Frontend** - Crie o arquivo `frontend/.env`:
-
-```env
-VITE_API_URL=http://localhost:3001/api
 ```
 
 ### 4. Executar Localmente
 
-Abra dois terminais:
-
-**Terminal 1 - Backend:**
-
 ```bash
-npm run dev:backend
+npm run dev
 ```
 
-**Terminal 2 - Frontend:**
-
-```bash
-npm run dev:frontend
-```
-
-Acesse: [http://localhost:5173](http://localhost:5173)
+Acesse: [http://localhost:3000](http://localhost:3000)
 
 ## 🌐 Deploy na Vercel
 
@@ -116,24 +99,28 @@ vercel --prod
 
 ```
 ping-pong-ranking/
-├── frontend/              # Frontend React + Vite
-│   ├── src/
-│   │   ├── components/   # Componentes React
-│   │   ├── services/     # API service
-│   │   ├── types/        # TypeScript types
-│   │   ├── App.tsx
-│   │   └── main.tsx
-│   └── package.json
-├── backend/              # Backend Node.js + Express
-│   ├── src/
-│   │   ├── routes/       # Rotas API
-│   │   ├── services/     # Serviços (Elo, Supabase)
-│   │   ├── types/        # TypeScript types
-│   │   └── index.ts
-│   └── package.json
+├── app/                  # Next.js App Router
+│   ├── api/             # API Routes (Backend)
+│   │   ├── health/
+│   │   ├── players/
+│   │   └── matches/
+│   ├── layout.tsx       # Layout principal
+│   ├── page.tsx         # Página inicial
+│   └── globals.css      # Estilos globais
+├── components/          # Componentes React
+│   ├── PlayerList.tsx
+│   ├── MatchForm.tsx
+│   ├── MatchHistory.tsx
+│   └── PlayerStats.tsx
+├── lib/                 # Serviços e utilidades
+│   ├── api.ts          # Client-side API service
+│   ├── eloService.ts   # Lógica do algoritmo Elo
+│   └── supabaseClient.ts # Cliente Supabase
+├── types/              # TypeScript types
+│   └── index.ts
 ├── supabase/
-│   └── schema.sql        # Schema do banco de dados
-└── package.json          # Root package.json
+│   └── schema.sql      # Schema do banco de dados
+└── package.json        # Dependências
 ```
 
 ## 🎮 Como Usar
@@ -159,17 +146,17 @@ O sistema usa o algoritmo Elo com as seguintes características:
 ## 🔧 Scripts Disponíveis
 
 ```bash
-# Instalar dependências
-npm run install:all
-
 # Desenvolvimento
-npm run dev:frontend    # Frontend em http://localhost:5173
-npm run dev:backend     # Backend em http://localhost:3001
+npm run dev           # Inicia servidor dev em http://localhost:3000
 
 # Build para produção
-npm run build          # Build completo (backend + frontend)
-npm run build:frontend # Build apenas frontend
-npm run build:backend  # Build apenas backend
+npm run build         # Build otimizado para produção
+
+# Produção
+npm start             # Inicia servidor de produção
+
+# Linting
+npm run lint          # Verifica código com ESLint
 ```
 
 ## 🧪 API Endpoints
